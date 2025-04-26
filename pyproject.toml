@@ -1,0 +1,16 @@
+[project]
+name = "zum-project"
+authors = [
+    {name = "Patryk Filip Gryz", email = "pfgryz@gmail.com"},
+    {name = "Igor Matynia", email = "igor.matynia@gmail.com"},
+]
+version = "0.1.0"
+description = "ZUM Project"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.7",
+]
