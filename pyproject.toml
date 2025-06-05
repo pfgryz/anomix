@@ -1,22 +1,27 @@
 [project]
-name = "zum-project"
+name = "anomix"
+version = "0.1.0"
+description = "ZUM Project"
 authors = [
     {name = "Patryk Filip Gryz", email = "pfgryz@gmail.com"},
     {name = "Igor Matynia", email = "igor.matynia@gmail.com"},
 ]
-version = "0.1.0"
-description = "ZUM Project"
-readme = "README.md"
 requires-python = ">=3.9"
+readme = "README.md"
 dependencies = [
     "aiohttp>=3.11.18",
     "matplotlib>=3.9.4",
     "pandas>=2.2.3",
     "scikit-learn>=1.6.1",
     "scipy>=1.13.1",
+    "tqdm>=4.67.1",
 ]
 
 [dependency-groups]
 dev = [
     "ruff>=0.11.7",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,14 +1,17 @@
-default: run
+default: prepare-env
+
+prepare-env:
+    uv sync
 
 run:
     uv run python main.py
 
 format:
-    ruff check
-    ruff format --fix
+    uv run ruff check
+    uv run ruff format
 
-clean_datasets:
+clean-datasets:
     rm -rf datasets/*
 
-download_datasets:
-    uv run -m src.data_loaders.dataset_download
+download-datasets:
+    uv run python scripts/download_datasets.py

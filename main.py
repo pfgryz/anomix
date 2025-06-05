@@ -1,4 +1,4 @@
-from src.data_loaders import get_all_datasets
+from anomix.data_loaders import get_all_datasets
 
 
 def main():

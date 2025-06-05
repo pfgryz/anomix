@@ -7,9 +7,7 @@ from sklearn.model_selection import train_test_split
 
 
 def get_kddcup99():
-    X, y = fetch_kddcup99(
-        subset="SA", percent10=True, random_state=42, return_X_y=True, as_frame=True
-    )
+    X, y = fetch_kddcup99(subset="SA", percent10=True, random_state=42, return_X_y=True, as_frame=True)
     y = (y != b"normal.").astype(np.int32)
     X, _, y, _ = train_test_split(X, y, train_size=0.1, stratify=y, random_state=42)
     return DatasetWrapperBase("kddcup99", X, y)
