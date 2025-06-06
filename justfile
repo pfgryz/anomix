@@ -1,17 +1,32 @@
 default: prepare-env
 
+# region Environment
+
 prepare-env:
     uv sync
 
-run:
-    uv run python main.py
-
-format:
-    uv run ruff check
-    uv run ruff format
-
 clean-datasets:
-    rm -rf datasets/*
+    rm -rf data/*
 
 download-datasets:
-    uv run python scripts/download_datasets.py
+    uv run python scripts/prepare_datasets.py
+
+# endregion
+
+# region Developer Tools
+
+format:
+    uv run ruff check --fix
+    uv run ruff format
+
+test:
+    uv run -m pytest
+
+# endregion
+
+# region Experiments
+
+run:
+    uv run python main.py
+    
+# endregion

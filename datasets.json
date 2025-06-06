@@ -1,0 +1,69 @@
+[
+    {
+        "name": "celeba",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/numerical%20data/DevNet%20datasets/celeba_baldvsnonbald_normalised.csv",
+        "format": "csv",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "donors",
+        "url": "https://raw.githubusercontent.com/GuansongPang/ADRepository-Anomaly-detection-datasets/refs/heads/main/numerical%20data/DevNet%20datasets/KDD2014_donors_10feat_nomissing_normalised.csv",
+        "format": "csv",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "thyroid",
+        "url": "https://raw.githubusercontent.com/GuansongPang/ADRepository-Anomaly-detection-datasets/refs/heads/main/numerical%20data/DevNet%20datasets/annthyroid_21feat_normalised.csv",
+        "format": "csv",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "bank",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/numerical%20data/DevNet%20datasets/bank-additional-full_normalised.csv",
+        "format": "csv",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "backdoor",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/numerical%20data/DevNet%20datasets/UNSW_NB15_traintest_backdoor.tar.xz",
+        "format": "csv",
+        "archive": "tar.xz",
+        "inner_path": "UNSW_NB15_traintest_backdoor.csv",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "income",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/numerical%20data/DevNet%20datasets/census-income-full-mixed-binarized.tar.xz",
+        "format": "csv",
+        "archive": "tar.xz",
+        "inner_path": "census-income-full-mixed-binarized.csv",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "bank-nominal",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/categorical%20data/bank-additional-ful-nominal.arff",
+        "format": "arff",
+        "label_column": "y",
+        "anomalous_value": "yes"
+    },
+    {
+        "name": "solar-flare",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/categorical%20data/solar-flare_FvsAll-cleaned.arff",
+        "format": "arff",
+        "label_column": "class",
+        "anomalous_value": 1
+    },
+    {
+        "name": "chess",
+        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/categorical%20data/chess_krkopt_zerovsall.arff",
+        "format": "arff",
+        "label_column": "class",
+        "anomalous_value": 1
+    }
+]

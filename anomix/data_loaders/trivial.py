@@ -1,8 +1,8 @@
-from .dataset_wrapper import DatasetWrapperBase
-from sklearn.datasets import make_blobs, make_moons
 import numpy as np
+from sklearn.datasets import make_blobs, make_moons
 
 
+# region @TODO: Refactor to common code with anomix.datasets
 def combine_datasets(datasets):
     """
     Combine multiple (X, Y) datasets into a single dataset.
@@ -51,34 +51,35 @@ def create_uniform_anomalies(n_samples, low, high, sample_classes):
     return rng.uniform(low=low, high=high, size=(n_samples, 2)), np.ones((n_samples)) * sample_classes
 
 
-def get_blob_datasets() -> list[DatasetWrapperBase]:
-    return [
-        DatasetWrapperBase(
-            "one_blob_and_noise_2d",
-            *combine_datasets(
-                [
-                    create_blobs_data([(0, 0)], 1.0, 100, 0),
-                    create_uniform_anomalies(20, -5, 5, 1),
-                ]
-            ),
-        ),
-        DatasetWrapperBase(
-            "two_blobs_and_noise",
-            *combine_datasets(
-                [
-                    create_blobs_data([(-0.5, -0.5), (0.5, 0.5)], 1.0, 100, 0),
-                    create_uniform_anomalies(20, -5, 5, 1),
-                ]
-            ),
-        ),
-        DatasetWrapperBase(
-            "two_moons",
-            *combine_datasets(
-                [
-                    create_moons_data(100, 4, 0.2, [0.2, 0.3], 0),
-                    create_blobs_data([(0.5, 0.5)], 1.0, 100, 0),
-                    create_uniform_anomalies(20, -5, 5, 1),
-                ]
-            ),
-        ),
-    ]
+# def get_blob_datasets() -> list[DatasetWrapperBase]:
+#     return [
+#         DatasetWrapperBase(
+#             "one_blob_and_noise_2d",
+#             *combine_datasets(
+#                 [
+#                     create_blobs_data([(0, 0)], 1.0, 100, 0),
+#                     create_uniform_anomalies(20, -5, 5, 1),
+#                 ]
+#             ),
+#         ),
+#         DatasetWrapperBase(
+#             "two_blobs_and_noise",
+#             *combine_datasets(
+#                 [
+#                     create_blobs_data([(-0.5, -0.5), (0.5, 0.5)], 1.0, 100, 0),
+#                     create_uniform_anomalies(20, -5, 5, 1),
+#                 ]
+#             ),
+#         ),
+#         DatasetWrapperBase(
+#             "two_moons",
+#             *combine_datasets(
+#                 [
+#                     create_moons_data(100, 4, 0.2, [0.2, 0.3], 0),
+#                     create_blobs_data([(0.5, 0.5)], 1.0, 100, 0),
+#                     create_uniform_anomalies(20, -5, 5, 1),
+#                 ]
+#             ),
+#         ),
+#     ]
+# endregion
