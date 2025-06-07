@@ -37,15 +37,6 @@
         "anomalous_value": 1
     },
     {
-        "name": "income",
-        "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/numerical%20data/DevNet%20datasets/census-income-full-mixed-binarized.tar.xz",
-        "format": "csv",
-        "archive": "tar.xz",
-        "inner_path": "census-income-full-mixed-binarized.csv",
-        "label_column": "class",
-        "anomalous_value": 1
-    },
-    {
         "name": "bank-nominal",
         "url": "https://github.com/GuansongPang/ADRepository-Anomaly-detection-datasets/raw/refs/heads/main/categorical%20data/bank-additional-ful-nominal.arff",
         "format": "arff",
