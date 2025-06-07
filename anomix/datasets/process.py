@@ -30,7 +30,7 @@ def process_datasets(definitions: list[DatasetDefinition]) -> None:
         assert definition.label_column in df.columns, (
             f"{definition.label_column} not in columns for dataset {definition.name}"
         )
-        df["__label__"] = (df[definition.label_column] == definition.anomalous_value).astype(int)
+        df["__label__"] = 1 - 2 * (df[definition.label_column] == definition.anomalous_value).astype(int)
         df.drop(columns=[definition.label_column], inplace=True)
 
         definition = Dataset.from_pandas(df, preserve_index=False)

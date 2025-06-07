@@ -10,4 +10,5 @@ class AnomalyDetector(BaseEstimator):
 
     def fit_predict(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray = None) -> np.ndarray:
         scores = self.score_samples(X, labels, centroids)
-        return (scores < 0).astype(int)
+        c = (scores < 0).astype(int)
+        return 1 - 2 * c    # Map to -1, 1
