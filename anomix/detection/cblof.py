@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.base import BaseEstimator
+
+from anomix.detection import AnomalyDetector
 
 
-class CBLOFScorer(BaseEstimator):
+class CBLOFDetector(AnomalyDetector):
     def __init__(self, threshold: float = 0.0):
         self.threshold = threshold
 
@@ -14,8 +15,4 @@ class CBLOFScorer(BaseEstimator):
         cluster_weights = cluster_sizes[labels]
         cblof_scores = distances * cluster_weights
 
-        return cblof_scores
-
-    def fit_predict(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-        scores = self.score_samples(X, labels, centroids)
-        return (scores > self.threshold).astype(int)
+        return self.threshold - cblof_scores

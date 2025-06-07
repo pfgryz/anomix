@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.base import BaseEstimator
+
+from anomix.detection import AnomalyDetector
 
 
-class DistanceThresholdScorer(BaseEstimator):
+class DistanceThresholdDetector(AnomalyDetector):
     def __init__(self, threshold: float):
         self.threshold = threshold
 
@@ -21,8 +22,4 @@ class DistanceThresholdScorer(BaseEstimator):
             else:
                 distances_norm[mask] = (d - d.min()) / (d.max() - d.min())
 
-        return distances_norm
-
-    def fit_predict(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-        scores = self.score_samples(X, labels, centroids)
-        return (scores > self.threshold).astype(int)
+        return self.threshold - distances_norm

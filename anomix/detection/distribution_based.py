@@ -1,13 +1,14 @@
 import numpy as np
 from scipy.spatial.distance import cdist
-from sklearn.base import BaseEstimator
+
+from anomix.detection import AnomalyDetector
 
 
-class DistributionBasedScorer(BaseEstimator):
+class DistributionBasedDetector(AnomalyDetector):
     def __init__(self, threshold: float):
         self.threshold = threshold
 
-    def score_samples(self, X: np.ndarray, labels: np.ndarray) -> np.ndarray:
+    def score_samples(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray = None) -> np.ndarray:
         mean_distances = np.zeros_like(labels, dtype=float)
         mu = np.zeros_like(labels, dtype=float)
         sigma = np.zeros_like(labels, dtype=float)
@@ -22,9 +23,4 @@ class DistributionBasedScorer(BaseEstimator):
             mu[mask] = np.mean(mean_distances)
             sigma[mask] = np.std(mean_distances)
 
-        return mean_distances, mu, sigma
-
-    def fit_predict(self, X: np.ndarray, labels: np.ndarray) -> np.ndarray:
-        mean_distances, mu, sigma = self.score_samples(X, labels)
-
-        return (mean_distances > mu + self.threshold * sigma).astype(int)
+        return mu + self.threshold * sigma - mean_distances
