@@ -14,10 +14,10 @@ def iter_ds(ds: Dataset, label_column: str = "__label__"):
 def collect_ds(ds: Dataset, label_column: str = "__label__"):
     feature_columns = [col for col in ds.column_names if col != label_column]
 
-    ds.set_format(type="numpy", columns=feature_columns + [label_column])
+    data_dict = ds.to_dict()
 
-    X = np.stack([np.array(ds[col], dtype=np.float32) for col in feature_columns], axis=1)
-    Y = ds[label_column]
+    X = np.stack([np.array(data_dict[col], dtype=np.float32) for col in feature_columns], axis=1)
+    Y = np.array(data_dict[label_column])
 
     return X, Y
 
