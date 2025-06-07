@@ -42,3 +42,11 @@ def test_distribution_based_detection(sample_data):
 
     expected = np.array([1, 1, -1, 1, 1, -1])
     assert (predictions == expected).all()
+
+
+def test_distribution_based_negative_labels(sample_data):
+    X, _ = sample_data
+    labels = np.array([0, 0, 0, 1, -1, 1])
+
+    scorer = DistributionBasedDetector(threshold=1.0)
+    _ = scorer.fit_predict(X, labels)

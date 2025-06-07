@@ -47,3 +47,11 @@ def test_cblof_anomaly_detection(sample_data):
 
     expected = np.array([1, 1, 1, 1, 1, -1])
     assert (predictions == expected).all()
+
+
+def test_cblof_negative_labels(sample_data):
+    X, _, centroids = sample_data
+    labels = np.array([0, 0, 0, 1, -1, 1])
+
+    detector = CBLOFDetector(threshold=10.0)
+    _ = detector.fit_predict(X, labels, centroids)

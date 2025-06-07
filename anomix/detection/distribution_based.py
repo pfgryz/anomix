@@ -15,8 +15,14 @@ class DistributionBasedDetector(AnomalyDetector):
 
         for cluster_id in np.unique(labels):
             mask = labels == cluster_id
-            x = X[mask]
 
+            if cluster_id == -1:
+                mean_distances[mask] = 10
+                mu[mask] = 0
+                sigma[mask] = 0
+                continue
+
+            x = X[mask]
             D = cdist(x, x)
             mean_distances[mask] = D.mean(axis=1)
 

@@ -8,11 +8,14 @@ class CBLOFDetector(AnomalyDetector):
         self.threshold = threshold
 
     def score_samples(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-        cluster_sizes = np.bincount(labels)
-        assigned_centroids = centroids[labels]
+        mask = labels != -1
+        cluster_sizes = np.bincount(labels[mask])
 
-        distances = np.linalg.norm(X - assigned_centroids, axis=1)
-        cluster_weights = cluster_sizes[labels]
-        cblof_scores = distances * cluster_weights
+        assigned_centroids = centroids[labels[mask]]
+        distances = np.linalg.norm(X[mask] - assigned_centroids, axis=1)
+        cluster_weights = cluster_sizes[labels[mask]]
+
+        cblof_scores = np.ones(X.shape[0]) * 1000
+        cblof_scores[mask] = distances * cluster_weights
 
         return self.threshold - cblof_scores

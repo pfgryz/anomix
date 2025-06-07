@@ -8,13 +8,20 @@ class DistanceThresholdDetector(AnomalyDetector):
         self.threshold = threshold
 
     def score_samples(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-        assigned_centroids = centroids[labels]
+        mask = labels != -1
+
+        assigned_centroids = np.zeros_like(X)
+        assigned_centroids[mask] = centroids[labels[mask]]
 
         distances = np.linalg.norm(X - assigned_centroids, axis=1)
         distances_norm = np.zeros_like(distances)
 
         for cluster_id in np.unique(labels):
             mask = labels == cluster_id
+
+            if cluster_id == -1:
+                distances_norm[mask] = 1
+                continue
 
             d = distances[mask]
             if d.max() == d.min():

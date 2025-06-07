@@ -49,3 +49,11 @@ def test_distance_threshold_detection(sample_data, threshold: float, expected: t
 
     expected = np.array(expected)
     assert (predictions == expected).all()
+
+
+def test_distance_threshold_negative_labels(sample_data):
+    X, _, centroids = sample_data
+    labels = np.array([0, 0, 0, -1, 1])
+
+    detector = DistanceThresholdDetector(threshold=0.8)
+    _ = detector.fit_predict(X, labels, centroids)
