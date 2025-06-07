@@ -20,7 +20,7 @@ format:
     uv run ruff format
 
 test:
-    uv run -m pytest
+    uv run -m pytest -s
 
 # endregion
 
