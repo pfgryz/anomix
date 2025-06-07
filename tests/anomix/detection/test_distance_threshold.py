@@ -37,8 +37,8 @@ def test_distance_treshold_scores(sample_data):
 @pytest.mark.parametrize(
     "threshold, expected",
     [
-        (0.8, (0, 0, 1, 0, 1)),
-        (0.1, (0, 1, 1, 0, 1)),
+        (0.8, (1, 1, -1, 1, -1)),
+        (0.1, (1, -1, -1, 1, -1)),
     ],
 )
 def test_distance_threshold_detection(sample_data, threshold: float, expected: tuple):

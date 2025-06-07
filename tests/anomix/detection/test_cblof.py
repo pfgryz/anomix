@@ -45,5 +45,5 @@ def test_cblof_anomaly_detection(sample_data):
     detector = CBLOFDetector(threshold=10.0)
     predictions = detector.fit_predict(X, labels, centroids)
 
-    expected = np.array([0, 0, 0, 0, 0, 1])
+    expected = np.array([1, 1, 1, 1, 1, -1])
     assert (predictions == expected).all()

@@ -44,5 +44,5 @@ def test_anomix_detector_anomalies(sample_data):
     anomix_detector = AnomixDetector(clustering, detection)
     predictions = anomix_detector.fit_predict(X)
 
-    expected = np.array([0, 0, 0, 0, 0, 1])
+    expected = np.array([1, 1, 1, 1, 1, -1])
     assert (predictions == expected).all()

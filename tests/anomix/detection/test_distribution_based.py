@@ -40,5 +40,5 @@ def test_distribution_based_detection(sample_data):
     scorer = DistributionBasedDetector(threshold=1.0)
     predictions = scorer.fit_predict(X, labels)
 
-    expected = np.array([0, 0, 1, 0, 0, 1])
+    expected = np.array([1, 1, -1, 1, 1, -1])
     assert (predictions == expected).all()
