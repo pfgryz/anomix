@@ -1,5 +1,5 @@
-from datasets import Dataset, load_from_disk
 import numpy as np
+from datasets import Dataset, load_from_disk
 
 from anomix.config import PROCESSED_DATA_DIR
 from anomix.datasets.definition import DatasetDefinition
@@ -16,7 +16,7 @@ def collect_ds(ds: Dataset, label_column: str = "__label__"):
 
     ds.set_format(type="numpy", columns=feature_columns + [label_column])
 
-    X = np.stack([ds[col] for col in feature_columns], axis=1)
+    X = np.stack([np.array(ds[col], dtype=np.float32) for col in feature_columns], axis=1)
     Y = ds[label_column]
 
     return X, Y
