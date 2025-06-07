@@ -17,5 +17,5 @@ def collect_ds(ds: Dataset, label_column: str = "__label__"):
 
 def load_ds(definition: DatasetDefinition):
     path = PROCESSED_DATA_DIR / f"{definition.name}"
-    ds = load_from_disk(path)
+    ds = load_from_disk(str(path))
     return ds
