@@ -32,10 +32,10 @@ def test_cblof_scores(sample_data):
     scorer = CBLOFScorer(threshold=0.0)
     scores = scorer.score_samples(X, labels, centroids)
 
-    assert scores[2] > scores[1]    # 1st closer to centroid
-    assert scores[5] > scores[4]    # 4th closer to centroid
-    assert scores[5] > scores[3]    # 3th closer to centroid
-    assert scores[3] > scores[4]    # 4th closer to centroid
+    assert scores[2] > scores[1]  # 1st closer to centroid
+    assert scores[5] > scores[4]  # 4th closer to centroid
+    assert scores[5] > scores[3]  # 3th closer to centroid
+    assert scores[3] > scores[4]  # 4th closer to centroid
 
 
 def test_cblof_anomaly_detection(sample_data):

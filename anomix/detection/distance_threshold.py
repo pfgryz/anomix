@@ -3,7 +3,6 @@ from sklearn.base import BaseEstimator
 
 
 class DistanceThresholdScorer(BaseEstimator):
-
     def __init__(self, threshold: float):
         self.threshold = threshold
 

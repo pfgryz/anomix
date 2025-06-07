@@ -7,13 +7,15 @@ from anomix.detection.distance_threshold import DistanceThresholdScorer
 
 @pytest.fixture
 def sample_data():
-    X = np.array([
-        [0.0, 0.0],
-        [1.0, 1.0],
-        [5.0, 5.0],
-        [2.0, 1.0],
-        [4.0, 5.0],
-    ])
+    X = np.array(
+        [
+            [0.0, 0.0],
+            [1.0, 1.0],
+            [5.0, 5.0],
+            [2.0, 1.0],
+            [4.0, 5.0],
+        ]
+    )
     labels = np.array([0, 0, 0, 1, 1])
     centroids = np.array([[0.0, 0.0], [1.0, 1.0]])
     return X, labels, centroids
@@ -37,7 +39,7 @@ def test_distance_treshold_scores(sample_data):
     [
         (0.8, (0, 0, 1, 0, 1)),
         (0.1, (0, 1, 1, 0, 1)),
-    ]
+    ],
 )
 def test_distance_threshold_detection(sample_data, threshold: float, expected: tuple):
     X, labels, centroids = sample_data

@@ -1,10 +1,9 @@
 import numpy as np
-from sklearn.base import BaseEstimator
 from scipy.spatial.distance import cdist
+from sklearn.base import BaseEstimator
 
 
 class DistributionBasedScorer(BaseEstimator):
-
     def __init__(self, threshold: float):
         self.threshold = threshold
 
