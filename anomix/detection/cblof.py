@@ -9,7 +9,7 @@ class CBLOFDetector(AnomalyDetector):
 
     def score_samples(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> np.ndarray:
         mask = labels != -1
-        cluster_sizes = np.bincount(labels[mask])
+        cluster_sizes = np.bincount(labels[mask].astype(int))
 
         assigned_centroids = centroids[labels[mask]]
         distances = np.linalg.norm(X[mask] - assigned_centroids, axis=1)

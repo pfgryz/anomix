@@ -30,8 +30,15 @@ def process_datasets(definitions: list[DatasetDefinition]) -> None:
         assert definition.label_column in df.columns, (
             f"{definition.label_column} not in columns for dataset {definition.name}"
         )
-        df["__label__"] = 1 - 2 * (df[definition.label_column] == definition.anomalous_value).astype(int)
-        df.drop(columns=[definition.label_column], inplace=True)
 
-        definition = Dataset.from_pandas(df, preserve_index=False)
+        labels = 1 - 2 * (df[definition.label_column] == definition.anomalous_value).astype(int)
+
+        categorical_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
+        categorical_cols = [col for col in categorical_cols if col != "__label__"]
+        df_encoded = pd.get_dummies(df[categorical_cols], drop_first=False)
+
+        other_cols = df.drop(columns=categorical_cols + ["__label__"])
+        df_final = pd.concat([other_cols, df_encoded, labels], axis=1)
+
+        definition = Dataset.from_pandas(df_final, preserve_index=False)
         definition.save_to_disk(str(output_path))
