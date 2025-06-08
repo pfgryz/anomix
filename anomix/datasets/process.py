@@ -22,7 +22,7 @@ def process_datasets(definitions: list[DatasetDefinition]) -> None:
             data, _ = arff.loadarff(extracted_path)
             df = pd.DataFrame(data)
 
-            cat_cols = df.select_dtypes([object]).columns
+            cat_cols = df.select_dtypes([object]).columns.difference([definition.label_column])
             df[cat_cols] = df[cat_cols].apply(lambda col: col.str.decode("utf-8"))
             df = pd.get_dummies(df, columns=cat_cols, drop_first=False)
         else:
