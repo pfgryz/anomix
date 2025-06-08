@@ -22,15 +22,15 @@ def process_datasets(definitions: list[DatasetDefinition]) -> None:
             data, _ = arff.loadarff(extracted_path)
             df = pd.DataFrame(data)
 
-            for col in df.select_dtypes([object]).columns:
-                df[col] = df[col].str.decode("utf-8")
+            cat_cols = df.select_dtypes([object]).columns
+            df[cat_cols] = df[cat_cols].apply(lambda col: col.str.decode("utf-8"))
+            df = pd.get_dummies(df, columns=cat_cols, drop_first=False)
         else:
             raise ValueError("Unsupported file format")
 
         assert definition.label_column in df.columns, (
             f"{definition.label_column} not in columns for dataset {definition.name}"
         )
-
 
         labels = 1 - 2 * (df[definition.label_column] == definition.anomalous_value).astype(int)
 
