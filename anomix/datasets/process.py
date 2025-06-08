@@ -22,9 +22,10 @@ def process_datasets(definitions: list[DatasetDefinition]) -> None:
             data, _ = arff.loadarff(extracted_path)
             df = pd.DataFrame(data)
 
-            cat_cols = df.select_dtypes([object]).columns.difference([definition.label_column])
+            cat_cols = df.select_dtypes([object]).columns
             df[cat_cols] = df[cat_cols].apply(lambda col: col.str.decode("utf-8"))
-            df = pd.get_dummies(df, columns=cat_cols, drop_first=False)
+            df = pd.get_dummies(df, columns=cat_cols.difference([definition.label_column]), drop_first=False)
+            print(df.info())
         else:
             raise ValueError("Unsupported file format")
 
@@ -32,18 +33,10 @@ def process_datasets(definitions: list[DatasetDefinition]) -> None:
             f"{definition.label_column} not in columns for dataset {definition.name}"
         )
 
-        labels = 1 - 2 * (df[definition.label_column] == definition.anomalous_value).astype(int)
+        df["__label__"] = 1 - 2 * (df[definition.label_column] == definition.anomalous_value).astype(int)
+        df.drop(columns=[definition.label_column], inplace=True)
 
-        categorical_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
-        categorical_cols = [col for col in categorical_cols if col != "__label__"]
+        print(df.info())
 
-        if len(categorical_cols) != 0:
-            df_encoded = pd.get_dummies(df[categorical_cols], drop_first=False)
-            other_cols = df.drop(columns=categorical_cols + [definition.label_column])
-            df_final = pd.concat([other_cols, df_encoded, labels], axis=1)
-        else:
-            other_cols = df.drop(columns=[definition.label_column])
-            df_final = pd.concat([other_cols, labels], axis=1)
-
-        definition = Dataset.from_pandas(df_final, preserve_index=False)
+        definition = Dataset.from_pandas(df, preserve_index=False)
         definition.save_to_disk(str(output_path))
